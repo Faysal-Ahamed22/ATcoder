@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll   long long
+#define pb   push_back
+#define yes   cout<<"YES"<<endl
+#define no   cout<<"NO"<<endl
+#define all(x) (x).begin(), (x).end()
+#define    gcd(a,b)      __gcd(a,b)
+#define    lcm(a,b)  (a*b)/__gcd(a,b)
+#define optimize() ios_base::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+const ll mx=1e5+123; 
+ll dp[123][mx];
+ll w[123],p[123];
+ll n,sz; 
+
+ll solve(ll currIndex, ll currWeight){
+
+    if(currIndex>n)return 0;
+    if(dp[currIndex][currWeight]!=-1)return dp[currIndex][currWeight];
+    ll ret1=0,ret2=0;
+    if(w[currIndex]+currWeight<=sz)ret1=p[currIndex]+solve(currIndex+1, w[currIndex]+currWeight);
+    ret2=solve(1+currIndex, currWeight);
+    return dp[currIndex][currWeight]=max(ret1, ret2);
+
+    
+}
+
+int main()
+{
+    optimize();
+   memset(dp, -1, sizeof(dp));
+   cin>>n>>sz;
+   for(ll i=1; i<=n; i++)
+   {
+    cin>>w[i]>>p[i];
+   }
+   cout<<solve(1,0)<<endl;
+}
+/*****************  ALHAMDULILLAH  *****************/
